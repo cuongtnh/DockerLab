@@ -1,23 +1,42 @@
+version: '3'
 services:
-  mongodb: #Use Apache as Backend
-    image: mongo
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - ~/apps/mongo:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
+    nodejs:
+        build:
+          context: ./nodejs
+        container_name: nodejs
+        hostname: nodejs
+        ports:
+            - "3000:3000" 
+        networks:
+            - example-net
 
-  nginx:
-    image: nginx-basic-auth
-    ports:
-      - "80:80"
-    depends_on:
-      - mongodb
-    environment: 
-      - FORWARD_HOST=localhost
-      - FORWARD_PORT=80
-      - BASIC_USERNAME=cuongtnh
-      - BASIC_PASSWORD=123qwe123
+        depends_on:
+            - mongo
+    mongo:
+        container_name: mongo
+        image: mongo
+        volumes:
+            - ./data:/data/db
+        ports:
+            - "27017:27017" 
+        networks:
+            - example-net 
+    nginx:
+        build:
+          context: ./nginx
+        container_name: nginx
+        hostname: nginx
+        ports:
+            - "80:80" 
+        depends_on:
+            - nodejs
+        networks:
+            - example-net
+        environment: 
+            - FORWARD_HOST=localhost
+            - FORWARD_PORT=80
+            - BASIC_USERNAME=cuongtnh
+            - BASIC_PASSWORD=123qwe123
+        
+networks:
+  example-net:
