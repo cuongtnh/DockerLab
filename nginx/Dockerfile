@@ -2,8 +2,8 @@ FROM nginx:latest
 RUN apt-get update -y && rm -rf /var/lib/apt/lists/*
 ENV BASIC_USERNAME=username
 ENV BASIC_PASSWORD=password
-ENV FORWARD_HOST=google.com
-ENV FORWARD_PORT=80
+ENV FORWARD_HOST=nodejs
+ENV FORWARD_PORT=3000
 
 # Nginx config file
 WORKDIR /
