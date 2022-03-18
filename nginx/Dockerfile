@@ -1,7 +1,7 @@
 FROM nginx:latest
-RUN apt-get update -y && rm -rf /var/lib/apt/lists/*
-ENV BASIC_USERNAME=username
-ENV BASIC_PASSWORD=password
+RUN apt-get update -y && apt-get install -y apache2-utils && rm -rf /var/lib/apt/lists/*
+ENV BASIC_USERNAME=cuongtnh
+ENV BASIC_PASSWORD=123qwe123
 ENV FORWARD_HOST=nodejs
 ENV FORWARD_PORT=3000
 

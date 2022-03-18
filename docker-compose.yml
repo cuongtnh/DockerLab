@@ -9,7 +9,6 @@ services:
             - "3000:3000" 
         networks:
             - example-net
-
         depends_on:
             - mongo
     mongo:
@@ -32,11 +31,6 @@ services:
             - nodejs
         networks:
             - example-net
-        environment: 
-            - FORWARD_HOST=localhost
-            - FORWARD_PORT=80
-            - BASIC_USERNAME=cuongtnh
-            - BASIC_PASSWORD=123qwe123
         
 networks:
   example-net:
