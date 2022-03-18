@@ -7,8 +7,8 @@ ENV FORWARD_PORT=3000
 
 # Nginx config file
 WORKDIR /
-COPY auth.conf auth.conf
-#COPY /opt/nginx.conf /etc/nginx/nginx.conf
+#COPY auth.conf auth.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 # Startup script
 COPY run.sh ./
 RUN chmod 0755 ./run.sh
